@@ -41,21 +41,21 @@ Enjine.KeyboardInput = {
 
     Initialize: function () {
         var self = this;
-        if (!this.mobile) {
+        //if (!this.mobile) {
             document.onkeydown = function (event) {
                 self.KeyDownEvent(event);
             }
             document.onkeyup = function (event) {
                 self.KeyUpEvent(event);
             }
-        } else {
+        //} else {
             document.addEventListener('touchstart',function(event){
                 self.KeyDownEvent(event);
             },true);
             document.addEventListener('touchend',function(event){
                 self.KeyUpEvent(event);
             },true);
-        }
+        //}
     },
 
     IsKeyDown: function (key) {
