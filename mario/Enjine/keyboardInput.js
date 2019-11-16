@@ -39,23 +39,31 @@ Enjine.Keys = {
 Enjine.KeyboardInput = {
     Pressed: {},
 
-    Initialize: function () {
+    Initialize: function (isMobile) {
         var self = this;
-        //if (!this.mobile) {
+        var isGameStarted = false;
+        if (!isMobile) {
             document.onkeydown = function (event) {
                 self.KeyDownEvent(event);
             }
             document.onkeyup = function (event) {
                 self.KeyUpEvent(event);
             }
-        //} else {
+        } else {
             document.addEventListener('touchstart',function(event){
+                var keyCode = event.target.getAttribute("data-type");
+                if(!isGameStarted && keyCode === '83') {
+                    isGameStarted = !isGameStarted;
+                    $(document).trigger('enterGame');
+                }
+                event.keyCode = keyCode;
                 self.KeyDownEvent(event);
             },true);
             document.addEventListener('touchend',function(event){
+                event.keyCode = event.target.getAttribute("data-type");
                 self.KeyUpEvent(event);
             },true);
-        //}
+        }
     },
 
     IsKeyDown: function (key) {
@@ -65,19 +73,11 @@ Enjine.KeyboardInput = {
     },
 
     KeyDownEvent: function (event) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
         this.Pressed[event.keyCode] = true;
         this.PreventScrolling(event);
-
-        setTimeout(function () {
-
-        }, 10)
     },
 
     KeyUpEvent: function (event) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
         this.Pressed[event.keyCode] = false;
         this.PreventScrolling(event);
     },

@@ -32,11 +32,7 @@ Mario.TitleState.prototype.Enter = function() {
 
     this.font = Mario.SpriteCuts.CreateRedFont();
     
-    if(this.mobile) {
-        this.font.Strings[0] = { String: "Press Fire to Start", X: 96, Y: 120 };
-    } else {
-        this.font.Strings[0] = { String: "Press S to Start", X: 96, Y: 120 };
-    }
+    this.font.Strings[0] = { String: "Press S to Start", X: 96, Y: 120 };
 
     this.logoY = 20;
 
@@ -50,7 +46,7 @@ Mario.TitleState.prototype.Enter = function() {
 	Mario.MarioCharacter = new Mario.Character();
 	Mario.MarioCharacter.Image = Enjine.Resources.Images["smallMario"];
 
-	Mario.PlayTitleMusic();
+    Mario.PlayTitleMusic();
 };
 
 Mario.TitleState.prototype.Exit = function() {

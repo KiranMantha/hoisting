@@ -14,10 +14,16 @@
         </canvas>
         <div id="mobile-controls">
             <div>
-                <button class="btn" id="btnLeft" data-type="37" ontouchstart="touchEvent(event)" ontouchend="touchEvent(event)"><</button>
-                <button class="btn" id="btnRight" data-type="39" ontouchstart="touchEvent(event)" ontouchend="touchEvent(event)">></button>
+                <div id="control-collection">
+                    <button class="btn top" id="btnTop" data-type="38">v</button>
+                    <div>
+                        <button class="btn" id="btnLeft" data-type="37"><</button>
+                        <button class="btn" id="btnRight" data-type="39">></button>
+                    </div>
+                    <button class="btn" id="btnBottom" data-type="40">v</button>
+                </div>
             </div>
-            <button class="btn" id="btnFire" data-type="83" ontouchstart="touchEvent(event)" ontouchend="touchEvent(event)">S</button>
+            <button class="btn" id="btnFire" data-type="83">S</button>
         </div>
         <!-- Enjine Includes -->
         <script src="Enjine/core.js"></script>
@@ -77,36 +83,20 @@
             }
 
             $(document).ready(function () {
-                new Enjine.Application(hasTouch).Initialize(new Mario.LoadingState(hasTouch), 320, 240)
+                new Enjine.Application(hasTouch).Initialize(new Mario.LoadingState(hasTouch), 320, 240);
+                $('#control-collection').hide();
             });
 
-            function touchEvent(event) {
-                event.keyCode = event.target.getAttribute("data-type");
-                $(document).trigger(event);
-            }
-            
+            $(document).on('enterGame', function(){
+                $('#control-collection').show();
+                $('#btnTop').show();
+                $('#btnBottom').show();
+            });
 
-            // $('body').keydown(function () {
-            //     if (isBtnClicked) {
-            //         setTimeout(function () {
-            //             isBtnClicked = false;
-            //             var event = $.Event('keyup');
-            //             event.keyCode = Enjine.Keys.S;
-            //             event.ismobile = true;
-            //             event.code = 'keyS';
-            //             $("body").trigger(event);
-            //         }, 50);
-            //     }
-            // });
-
-            // $('#btnFire').click(function (e) {
-            //     isBtnClicked = true;
-            //     var event = $.Event('keydown');
-            //     event.keyCode = Enjine.Keys.S;
-            //     event.ismobile = true;
-            //     event.code = 'keyS';
-            //     $("body").trigger(event);
-            // });
+            $(document).on('enterLevel', function() {
+                $('#btnTop').hide();
+                $('#btnBottom').hide();
+            });
         </script>
     </body>
 

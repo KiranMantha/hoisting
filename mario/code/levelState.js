@@ -76,7 +76,8 @@ Mario.LevelState.prototype.Enter = function() {
     this.TimeLeft = 200;
 
 	this.GotoMapState = false;
-	this.GotoLoseState = false;
+    this.GotoLoseState = false;
+    $(document).trigger('enterLevel');
 };
 
 Mario.LevelState.prototype.Exit = function() {

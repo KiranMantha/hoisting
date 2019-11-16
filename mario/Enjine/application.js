@@ -26,7 +26,7 @@ Enjine.Application.prototype = {
     Initialize: function(defaultState, resWidth, resHeight) {
         this.canvas = new Enjine.GameCanvas();
         this.timer = new Enjine.GameTimer();
-        Enjine.KeyboardInput.Initialize();      
+        Enjine.KeyboardInput.Initialize(this.mobile);
         this.canvas.Initialize("canvas", resWidth, resHeight);
         this.timer.UpdateObject = this;
         defaultState.mobile = this.mobile;

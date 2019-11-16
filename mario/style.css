@@ -22,7 +22,12 @@
   right: 0;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
   z-index: 2;
+}
+
+#mobile-controls div {
+  text-align: center;
 }
 
 #mobile-controls .btn {
@@ -30,5 +35,11 @@
   width: 90px;
   height: 90px;
   margin: 10px;
-  opacity: 0.7;
+  opacity: 0.55;  
+  border-radius: 100%;
+  font-weight: 600;
+}
+
+#mobile-controls .btn.top {
+  transform: rotate(180deg);
 }
