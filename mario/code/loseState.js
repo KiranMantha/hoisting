@@ -32,6 +32,7 @@ Mario.LoseState.prototype.Enter = function() {
     
     this.drawManager.Add(this.font);
     this.drawManager.Add(this.gameOver);
+    $(document).trigger('enterTitleState');
 };
 
 Mario.LoseState.prototype.Exit = function() {

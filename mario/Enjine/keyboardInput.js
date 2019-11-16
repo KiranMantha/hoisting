@@ -42,14 +42,14 @@ Enjine.KeyboardInput = {
     Initialize: function (isMobile) {
         var self = this;
         var isGameStarted = false;
-        if (!isMobile) {
+        //if (!isMobile) {
             document.onkeydown = function (event) {
                 self.KeyDownEvent(event);
             }
             document.onkeyup = function (event) {
                 self.KeyUpEvent(event);
             }
-        } else {
+        //} else {
             document.addEventListener('touchstart',function(event){
                 var keyCode = event.target.getAttribute("data-type");
                 if(!isGameStarted && keyCode === '83') {
@@ -63,7 +63,7 @@ Enjine.KeyboardInput = {
                 event.keyCode = event.target.getAttribute("data-type");
                 self.KeyUpEvent(event);
             },true);
-        }
+        //}
     },
 
     IsKeyDown: function (key) {

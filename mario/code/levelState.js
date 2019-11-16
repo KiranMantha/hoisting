@@ -461,11 +461,12 @@ Mario.LevelState.prototype.BumpInto = function(x, y) {
 
 Mario.LevelState.prototype.CheckForChange = function(context) {
 	if (this.GotoLoseState) {
-		context.ChangeState(new Mario.LoseState());
+        context.ChangeState(new Mario.LoseState()); 
 	}
 	else {
 		if (this.GotoMapState) {
-			context.ChangeState(Mario.GlobalMapState);
+            context.ChangeState(Mario.GlobalMapState);            
+            $(document).trigger('enterGame');    
 		}
 	}
 };

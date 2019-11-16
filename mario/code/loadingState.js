@@ -140,7 +140,7 @@ Mario.LoadingState.prototype.CheckForChange = function(context) {
     if (this.ImagesLoaded) {
 		//set up the global map state variable
 		Mario.GlobalMapState = new Mario.MapState();
-	
+        
         context.ChangeState(new Mario.TitleState());
     }
 };

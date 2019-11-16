@@ -2,6 +2,7 @@
 <html>
 
     <head>
+        <meta name="mobile-web-app-capable" content="yes">
         <title>Infinite Mario - JavaScript</title>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <script type='text/javascript' src='code/midi.js'></script>
@@ -80,10 +81,9 @@
                 $('#mobile-controls').show();
             } else {
                 $('#mobile-controls').hide();
-            }
+            }            
 
-            $(document).ready(function () {
-                new Enjine.Application(hasTouch).Initialize(new Mario.LoadingState(hasTouch), 320, 240);
+            $(document).on('enterTitleState', function() {
                 $('#control-collection').hide();
             });
 
@@ -96,6 +96,11 @@
             $(document).on('enterLevel', function() {
                 $('#btnTop').hide();
                 $('#btnBottom').hide();
+            });
+
+            $(document).ready(function () {
+                new Enjine.Application(hasTouch).Initialize(new Mario.LoadingState(hasTouch), 320, 240);                
+                $('#control-collection').hide();
             });
         </script>
     </body>
