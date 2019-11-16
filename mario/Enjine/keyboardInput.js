@@ -58,15 +58,11 @@ Enjine.KeyboardInput = {
                 }
                 event.keyCode = keyCode;
                 self.KeyDownEvent(event);
-            }, {
-                passive: false
-            });
+            }, false);
             document.addEventListener('touchend', function (event) {
                 event.keyCode = event.target.getAttribute("data-type");
                 self.KeyUpEvent(event);
-            }, {
-                passive: false
-            });
+            }, false);
         }
     },
 
