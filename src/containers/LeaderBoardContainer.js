@@ -42,20 +42,20 @@ class LeaderBoardContainer extends Component {
 
               return (
                 <div className="row team-report" key={'team-' + index}>
-                  <div className="col-sm-6">
+                  <div className="col-sm-6 col-12">
                     <div className="team-name">
                     <img className="team-logo" src={"/images/battleground/"+team.toLowerCase().replace(" ","-")+ ".png"} alt="{team}" />
                       </div>
                   </div>
-                  <div className="col-sm-6">
+                  <div className="col-sm-6 col-12">
                     <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
                     17856
     </div>
-                  <div className="col-sm-6">
+                  <div className="col-sm-12 col-md-6 col-12">
                     Attempts :: 
                     725
     </div>
-                  <div className="col-sm-6">
+                  <div className="col-sm-12 col-md-6 col-12">
                     Highest Level :: 
                     7
 
@@ -93,12 +93,12 @@ class LeaderBoardContainer extends Component {
                     <div className="team-name">{team}</div>
 
                   </div>
-                  <div className="col-sm-4">
+                  <div className="col-sm-4 col-12">
                   <br/>
                     <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
                     17856
     </div>
-                  <div className="col-sm-8">
+                  <div className="col-sm-8 col-12">
                   Highest Level :: 7
                    <br/> <br/>
                       Attempts ::  725
@@ -125,12 +125,12 @@ class LeaderBoardContainer extends Component {
         </div>
         <div className="card-body">
         <div className="row">
-          <div className="col-sm">
+          <div className="col-sm-4 col-12">
           <br/>
               <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
               17856
     </div>
-            <div className="col-sm">
+            <div className="col-sm col-12">
               Attempts :: 725 <br/> <br/>
     
               Highest Level :: 7
@@ -153,12 +153,12 @@ class LeaderBoardContainer extends Component {
         <div className="card-body">
 
           <div className="row">
-          <div className="col-sm">
+          <div className="col-sm-4 col-12">
           <br/>
               <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
               1200
     </div>
-            <div className="col-sm">
+            <div className="col-sm-8 col-12">
               Attempts :: 125 <br/> <br/>
               Highest Level :: 5
 

@@ -329,6 +329,9 @@ body {
     border-radius: 0 0 10px 10px;
 
     .row {
+      .col-12{
+        text-align: center;
+      }
       border-bottom:3px dotted #fff;
       color: #fff;
       margin-bottom:20px;
