@@ -24,7 +24,8 @@ class GameContainer extends Component {
 
         window.addEventListener('orientationchange', this.onOrientationChange);
         if (window.screen.orientation.type.indexOf('landscape') === 0) {
-            Mario.runMarioRun();
+          //  window.rMR = {};
+            setTimeout( function(){Mario.runMarioRun()}, 2000);
         }
 
     }
@@ -33,9 +34,9 @@ class GameContainer extends Component {
         if (e) {
             if (e.target.screen.orientation.type.indexOf('landscape') === 0) {
                 document.querySelector('body').setAttribute('class', 'black-bg');
-                window.runMarioRun();
+                setTimeout( function(){Mario.runMarioRun()}, 2000);
             } else {
-                window.Mario.StopMusic();
+                Mario.StopMusic();
                 document.querySelector('body').removeAttribute('class');
             }
         }
