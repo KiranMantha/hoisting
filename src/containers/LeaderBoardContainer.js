@@ -12,7 +12,7 @@ class LeaderBoardContainer extends Component {
     this.state = { oracleID: window.localStorage.getItem('oracleID') };
     this.history = this.props.history;
 
-    this.teamNames = ["Energy Pirates", "Auto Rebeles", "Retail Rangers", "Consumer Seals", "Tele Warriors", "COE Snipers", "Travel Ninjas", "Core Battalion", "FIN Mafia"];
+    this.teamNames = ["Energy Pirates", "Auto Rebels", "Retail Rangers", "Consumer Seals", "Tele Warriors", "COE Snipers", "Travel Ninjas", "Core Battalion", "FIN Mafia"];
 
   }
   playGame() {
@@ -41,23 +41,26 @@ class LeaderBoardContainer extends Component {
             this.teamNames.map((team, index) => {
 
               return (
-                <div className="row" key={'team-' + index}>
-                  <div className="col-sm-12">
-                    <div className="team-name">{team}</div>
+                <div className="row team-report" key={'team-' + index}>
+                  <div className="col-sm-6">
+                    <div className="team-name">
+                    <img className="team-logo" src={"/images/battleground/"+team.toLowerCase().replace(" ","-")+ ".png"} alt="{team}" />
+                      </div>
                   </div>
-                  <div className="col-sm">
-                    Attempts<br />
+                  <div className="col-sm-6">
+                    <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
+                    17856
+    </div>
+                  <div className="col-sm-6">
+                    Attempts :: 
                     725
     </div>
-                  <div className="col-sm">
-                    Highest Level<br />
+                  <div className="col-sm-6">
+                    Highest Level :: 
                     7
 
     </div>
-                  <div className="col-sm">
-                    <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> <br />
-                    17856
-    </div>
+              
                 </div>
               );
 
@@ -82,26 +85,26 @@ class LeaderBoardContainer extends Component {
           {
 
             this.teamNames.map((team, index) => {
-
+              let pstyle= {backgroundImage : "url()"};
               return (
-                <div className="row" key={'people-' + index}>
+                <div className="row people-board" key={'people-' + index} style={pstyle}>
+                  <img className="team-logo" src={"/images/battleground/"+team.toLowerCase().replace(' ','-') +".png"} alt={team} />
                   <div className="col-sm-12">
                     <div className="team-name">{team}</div>
 
                   </div>
-                  <div className="col-sm">
-                    Attempts<br />
-                    725
-    </div>
-                  <div className="col-sm">
-                    Highest Level<br />
-                    7
-
-    </div>
-                  <div className="col-sm">
-                    <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> <br />
+                  <div className="col-sm-4">
+                  <br/>
+                    <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
                     17856
     </div>
+                  <div className="col-sm-8">
+                  Highest Level :: 7
+                   <br/> <br/>
+                      Attempts ::  725
+                   
+                  </div>
+            
                 </div>
               );
 
@@ -121,20 +124,19 @@ class LeaderBoardContainer extends Component {
           <div>My Team Score Card</div>
         </div>
         <div className="card-body">
-          <div className="row">
-            <div className="col-sm">
-              Attempts<br />
-              725
-    </div>
-            <div className="col-sm">
-              Highest Level<br />
-              7
-
-    </div>
-            <div className="col-sm">
-              <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> <br />
+        <div className="row">
+          <div className="col-sm">
+          <br/>
+              <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
               17856
     </div>
+            <div className="col-sm">
+              Attempts :: 725 <br/> <br/>
+    
+              Highest Level :: 7
+
+    </div>
+           
           </div>
         </div>
       </div>
@@ -151,19 +153,17 @@ class LeaderBoardContainer extends Component {
         <div className="card-body">
 
           <div className="row">
-            <div className="col-sm">
-              Attempts<br />
-              125
-    </div>
-            <div className="col-sm">
-              Highest Level<br />
-              5
-
-    </div>
-            <div className="col-sm">
-              <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> <br />
+          <div className="col-sm">
+          <br/>
+              <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
               1200
     </div>
+            <div className="col-sm">
+              Attempts :: 125 <br/> <br/>
+              Highest Level :: 5
+
+    </div>
+            
           </div>
 
         </div>

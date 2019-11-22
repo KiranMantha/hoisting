@@ -28,7 +28,7 @@ class HomeContainer extends Component {
     
     if (!window.localStorage.getItem('timeup')) {
       template = <form className="form-signin" onSubmit={() => this.doLogin()}>
-
+       
         <div className="form-label-group">
           <label htmlFor="oracleID">Enter your OracleID</label>
           <input type="text" id="oracleID" className="form-control" placeholder="e.g. 128687" required="" autoFocus="" onChange={(e) => this.setState({ oracleID: e.target.value })} />
