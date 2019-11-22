@@ -3,8 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Infinite Mario - JavaScript</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script type='text/javascript' src='//www.midijs.net/lib/midi.js'></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet" /> 
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    -->
+    <link href="mario/style.css" type="text/css" rel="stylesheet" /> 
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -25,19 +35,74 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+
+
+  <!-- Enjine Includes -->
+  <script>window.rMR ={};</script>
+  <script src="mario/Enjine/core.js"></script>
+  <script src="mario/Enjine/gameCanvas.js"></script>
+  <script src="mario/Enjine/keyboardInput.js"></script>
+  <script src="mario/Enjine/resources.js"></script>
+  <script src="mario/Enjine/drawable.js"></script>
+  <script src="mario/Enjine/state.js"></script>
+  <script src="mario/Enjine/gameTimer.js"></script>
+  <script src="mario/Enjine/camera.js"></script>
+  <script src="mario/Enjine/drawableManager.js"></script>
+  <script src="mario/Enjine/sprite.js"></script>
+  <script src="mario/Enjine/spriteFont.js"></script>
+  <script src="mario/Enjine/frameSprite.js"></script>
+  <script src="mario/Enjine/animatedSprite.js"></script>
+  <script src="mario/Enjine/collideable.js"></script>
+  <script src="mario/Enjine/application.js"></script>
+
+  <!-- Actual game code -->
+  <script src="mario/code/setup.js"></script>
+  <script src="mario/code/spriteCuts.js"></script>
+  <script src="mario/code/level.js"></script>
+  <script src="mario/code/backgroundGenerator.js"></script>
+  <script src="mario/code/backgroundRenderer.js"></script>
+  <script src="mario/code/improvedNoise.js"></script>
+  <script src="mario/code/notchSprite.js"></script>
+  <script src="mario/code/character.js"></script>
+  <script src="mario/code/levelRenderer.js"></script>
+  <script src="mario/code/levelGenerator.js"></script>
+  <script src="mario/code/spriteTemplate.js"></script>
+  <script src="mario/code/enemy.js"></script>
+  <script src="mario/code/fireball.js"></script>
+  <script src="mario/code/sparkle.js"></script>
+  <script src="mario/code/coinAnim.js"></script>
+  <script src="mario/code/mushroom.js"></script>
+  <script src="mario/code/particle.js"></script>
+  <script src="mario/code/fireFlower.js"></script>
+  <script src="mario/code/bulletBill.js"></script>
+  <script src="mario/code/flowerEnemy.js"></script>
+  <script src="mario/code/shell.js"></script>
+
+  <script src="mario/code/titleState.js"></script>
+  <script src="mario/code/loadingState.js"></script>
+  <script src="mario/code/loseState.js"></script>
+  <script src="mario/code/winState.js"></script>
+  <script src="mario/code/mapState.js"></script>
+  <script src="mario/code/levelState.js"></script>
+
+  <script src="mario/code/music.js"></script>
+  <script src="mario/code/runmariorun.js"></script>
+
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <section id="root">
+
+     
+    </section>
+
+  
+   
     <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
+    All the Best for your Nostalgic time ...  We hope you will enjoy for sure!! 
     -->
   </body>
+
+
+
 </html>
