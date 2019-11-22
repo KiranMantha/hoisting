@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import Mario from "./game/mario/code/setup.js";
 
 class LeaderBoardContainer extends Component {
 
@@ -19,7 +20,7 @@ class LeaderBoardContainer extends Component {
   }
 
   componentDidMount() {
-    window.Mario.StopMusic();
+    Mario.StopMusic();
     let alreadyLoggedIn = window.localStorage.getItem('oracleID');
     if (!alreadyLoggedIn) {
       this.history.push('/');
@@ -32,7 +33,7 @@ class LeaderBoardContainer extends Component {
 
       <div className="card" >
         <div className="card-header">
-          <div>Top 10 Teams</div>
+          <div>Leading Teams</div>
         </div>
         <div className="card-body">
           {
@@ -69,7 +70,7 @@ class LeaderBoardContainer extends Component {
     );
   }
 
-  renderPeopleLeaderBoard() {
+  renderPeopleBoard() {
 
     return (
 
@@ -190,12 +191,12 @@ class LeaderBoardContainer extends Component {
             {this.renderMyScorecard()}
             {this.renderMyTeamScorecard()}
           </Tab>
-
+        
+          <Tab eventKey="peopleboardscore" title="Rock Stars" >
+            {this.renderPeopleBoard()}
+          </Tab>
           <Tab eventKey="leaderboardscore" title="LeaderBoard" >
             {this.renderTeamLeaderBoard()}
-          </Tab>
-          <Tab eventKey="peopleboardscore" title="PeopleBoard" >
-            {this.renderPeopleLeaderBoard()}
           </Tab>
         </Tabs>
 

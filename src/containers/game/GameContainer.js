@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import DeviceOrientation, { Orientation } from 'react-screen-orientation';
 import { withRouter } from 'react-router-dom';
+import Mario from "./mario/code/setup.js";
+
 class GameContainer extends Component {
 
     constructor(props) {
@@ -22,7 +24,7 @@ class GameContainer extends Component {
 
         window.addEventListener('orientationchange', this.onOrientationChange);
         if (window.screen.orientation.type.indexOf('landscape') === 0) {
-            window.runMarioRun();
+            Mario.runMarioRun();
         }
 
     }
@@ -40,7 +42,8 @@ class GameContainer extends Component {
     }
 
     componentWillUnmount() {
-        window.Mario.StopMusic();
+        window.rMR = null;
+        Mario.StopMusic();
         document.querySelector('body').removeAttribute('class');
     }
     render() {

@@ -1,5 +1,6 @@
+import React, { Component } from 'react';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
 // import logo from './logo.svg';
 import {
   BrowserRouter as Router,
@@ -9,17 +10,48 @@ import {
 } from "react-router-dom";
 
 import './App.scss';
+import { Mario, Enjine } from "./containers/game/mario/gameinclude.js";
 
 import LeaderBoardContainer from './containers/LeaderBoardContainer';
 import HomeContainer from './containers/HomeContainer';
 import GameContainer from './containers/game/GameContainer';
+import {CONFIG} from './config';
 
-function App() {
+class App extends Component {
 
-  return (
-    <Router>
-      <section className="app-container d-flex">
-    {/* 
+  constructor(props) {
+    super(props);
+    }
+
+  componentDidMount() {
+   
+    let timer = setInterval(()=> checkTimeout(), 5000);
+    checkTimeout();  
+    function checkTimeout() {
+      let dt = new Date();
+      
+      let endTime = new Date(CONFIG.endTime);
+  
+      if (dt.getTime() > endTime.getTime()) {
+        window.localStorage.removeItem('oracleID');
+        window.localStorage.setItem('timeup', true);
+        clearInterval(timer);
+        if ( window.location.pathname !== '/'){
+         window.location.href='/'
+        
+        }
+      } else {
+        window.localStorage.removeItem('timeup');
+      }
+    }
+
+  }
+
+  render() {
+    return (
+      <Router>
+        <section className="app-container d-flex">
+          {/* 
       <nav>
         <ul>
           <li>
@@ -32,25 +64,27 @@ function App() {
             <Link to="/game">Game</Link>
           </li>
         </ul>
-      </nav> */ 
-      }
+      </nav> */
+          }
 
-      {/* A <Switch> looks through its children <Route>s and
+          {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
-      <Switch>
-        <Route path="/leaderboard">
-          <LeaderBoardContainer />
-        </Route>
-        <Route path="/play">
-         <GameContainer />
-        </Route>
-        <Route path="/">
-          <HomeContainer />
-        </Route>
-      </Switch>
-    </section>
-  </Router>
-  );
+          <Switch>
+            <Route path="/leaderboard">
+              <LeaderBoardContainer />
+            </Route>
+            <Route path="/play">
+              <GameContainer />
+            </Route>
+            <Route path="/">
+              <HomeContainer />
+            </Route>
+          </Switch>
+        </section>
+      </Router>
+    );
+  }
+
 }
 
-export default App;
+export default  App;
