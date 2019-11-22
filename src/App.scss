@@ -105,9 +105,9 @@ body {
 }
 
 #mobile-controls .btn {
-  font-size: 3rem;
-  width: 5rem;
-  height: 5rem;
+  font-size: 2.5rem;
+  width: 4rem;
+  height: 4rem;
   margin: 0px;
   opacity: 0.8;
   border-radius: 100%;
@@ -187,9 +187,16 @@ body {
   }
 
   .leaderboard-tabs{
-    border-bottom: 1px solid #CB4F23;
-    margin-bottom:45px; 
+    
+    border-bottom: none; 
+    margin-bottom: 20px; 
     position:relative;
+    flex-direction:column;
+    
+    @media (min-width: 767px) {
+      border-bottom: 1px solid #CB4F23;
+      margin-bottom:45px; 
+      flex-direction:row;
     &:before{
       content:"";
         background: url(/images/header-bg.png) repeat-x;
@@ -203,6 +210,7 @@ body {
     height: 30px;
       
     }
+  }
     @media (max-width: 576px) {
       flex-direction: column;
     }
@@ -215,6 +223,25 @@ body {
         background:#CB4F23;
         border-color:#CB4F23;
         color:#fff;
+      }
+    }
+
+    @media (max-width: 767px) {
+      background:  #CB4F23;
+      border:3px solid #fff;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    
+      .nav-link {
+        margin-right:0px;
+        border-radius:0;
+        border-bottom:1px dashed #fff;
+        &.active, &:hover{
+          background:#fff;
+        border-color:#fff;
+        color:#CB4F23;
+        }
+
       }
     }
 
