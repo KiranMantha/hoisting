@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Super Mario 256';
+    src: url('SuperMarioGalaxy.eot');
+    src: url('SuperMarioGalaxy.eot?#iefix') format('embedded-opentype'),
+        url('SuperMarioGalaxy.woff2') format('woff2'),
+        url('SuperMarioGalaxy.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
