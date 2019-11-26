@@ -228,7 +228,7 @@ class LeaderBoardContainer extends Component {
             {this.renderTeamLeaderBoard()}
           </Tab>
         </Tabs>
-        <footer> <i className="fa fa-code"></i> with <i className="fa fa-heart"></i> from XT & Rogers Team</footer>
+        <footer> <div><i className="fa fa-code"></i> with <i className="fa fa-heart"></i> from XT & Rogers Team </div></footer>
         </section>
         </section>
         :  (this.state.err? (<div className="loading"> <div className="error">Sorry!! <br/> Seems something is on fire. Rescue is on its way. </div></div>) :  (<div className="loading">Loading .. .. ..</div>) ) }

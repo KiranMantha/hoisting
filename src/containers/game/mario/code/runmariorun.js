@@ -52,6 +52,8 @@ Mario.runMarioRun = function(){
         
         window.localStorage.setItem('coins', parseInt(params.coins));
         console.log("Coins Collected in this level are ", coins);
+
+        $.ajax( {url:'/score', type:"PUT", data: {coinsCollected: coins, level: params.level }})
         console.log("Total Coins Collected in this attempt is ", window.localStorage.getItem('coins'));
          
       });

@@ -22,8 +22,12 @@ Mario.PlayMusic = function(name) {
 	{
 		// Currently we stop all playing tracks when playing a new one
 		// MIDIjs can't play multiple at one time
-		MIDIjs.stop();;
+		MIDIjs.stop();
+		setTimeout(function(){
+		try{
 		MIDIjs.play(midifiles[name]);
+		}catch(ex){};
+	},1000);
 	}else{
 		console.error("Cannot play music track " + name + " as i have no data for it.");
 	}

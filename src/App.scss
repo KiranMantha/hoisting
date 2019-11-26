@@ -48,6 +48,7 @@
 }
 
 footer{
+  div{
   font-family: Arial, sans-serif;
   text-align: center;
      background: #5E91FE;
@@ -58,13 +59,18 @@ footer{
     font-size: 75%;
     box-shadow: -2px -3px 3px rgba(0,0,0,0.5);
     text-shadow: 0 1px 1px rgba(0,0,0,0.5);
-
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    max-width: 300px;
+    border-radius:5px 5px 0 0;
     .fa-heart{
       color:red;
     }
     .fa-code{
       color:#000;
     }
+  }
 
 }
 
