@@ -7,7 +7,7 @@ class GameContainer extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { oracleID: window.localStorage.getItem('oracleID') };
+        this.state = { oracleID: window.localStorage.getItem('oracleID'), disableButton:true };
         this.history = this.props.history;
         if (window.screen.orientation.type.indexOf('landscape') === 0) {
             document.querySelector('body').setAttribute('class', 'black-bg');
@@ -22,22 +22,25 @@ class GameContainer extends Component {
             this.history.push('/');
         }
 
-        window.addEventListener('orientationchange', this.onOrientationChange);
+        window.addEventListener('orientationchange',  this.onOrientationChange);
         if (window.screen.orientation.type.indexOf('landscape') === 0) {
           //  window.rMR = {};
-            setTimeout( function(){Mario.runMarioRun()}, 2000);
+            setTimeout( ()=>{Mario.runMarioRun(); this.setState({disableButton:false})}, 2000);
+        }else{
+            this.setState({disableButton:false});
         }
 
     }
     onOrientationChange(e) {
-        console.log(e);
+        // console.log(e);
         if (e) {
             if (e.target.screen.orientation.type.indexOf('landscape') === 0) {
                 document.querySelector('body').setAttribute('class', 'black-bg');
-                setTimeout( function(){Mario.runMarioRun()}, 2000);
+                setTimeout( ()=>{Mario.runMarioRun();  }, 2000);
             } else {
                 Mario.StopMusic();
                 document.querySelector('body').removeAttribute('class');
+               
             }
         }
     }
@@ -51,10 +54,11 @@ class GameContainer extends Component {
         window.screen.orientation.onchange = this.onOrientationChange();
         return (
             <section className="mario-game">
-                <button className="btn btn-secondary btn-sm go-back" onClick={() => this.history.push('/')}><i className="fa fa-chevron-left"></i> Back</button>
+                   
+                <button className="btn btn-secondary btn-sm go-back " disabled={this.state.disableButton} onClick={() => this.history.push('/')}><i className="fa fa-chevron-left"></i> Back</button>
                 <DeviceOrientation lockOrientation={'landscape'}>
                     <Orientation orientation='landscape' alwaysRender={false}>
-
+                   
                         <canvas id="canvas" width="640" height="480">
                             <p>Your browser does not support the canvas element.</p>
                         </canvas>

@@ -17,9 +17,15 @@ Mario.runMarioRun = function(){
       $(document).on('enterTitleState', function() {
           $('#control-collection').hide();
       });
+      $(document).on('enterAttempt', function(){
+
+        console.log("Attempt Count Increased");
+        window.localStorage.setItem('coins',0);
+
+       });
 
       $(document).on('enterGame', function(){
-          console.log("Game::  Entering Game --  Increase Attemp count");
+         // console.log("Game::  Entering Game --  Increase Attemp count");
           $('#control-collection').show();
           $('#btnTop').show();
           $('#btnBottom').show();
@@ -35,6 +41,18 @@ Mario.runMarioRun = function(){
       $(document).on('exitLevel', function(e, params) {
         Mario.StopMusic();
         console.log("Game::  Exiting Level --  Increase Level count", e, params);
+        var coins = 0;
+        var coinsStorage = window.localStorage.getItem('coins');
+        if( coinsStorage ===0){
+          coins = params.coins
+        } else{
+          coins = params.coins - coinsStorage;
+          
+        }
+        
+        window.localStorage.setItem('coins', parseInt(params.coins));
+        console.log("Coins Collected in this level are ", coins);
+        console.log("Total Coins Collected in this attempt is ", window.localStorage.getItem('coins'));
          
       });
 

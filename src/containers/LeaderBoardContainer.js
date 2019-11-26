@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
@@ -19,12 +20,30 @@ class LeaderBoardContainer extends Component {
     this.history.push("/play");
   }
 
+  logout() {
+    window.localStorage.removeItem('oracleID');
+    this.history.push("/");
+  }
+
+  loadLeaderBoardReport(){
+    axios.get('/leaderboard', {params:{oracleID: this.state.oracleID }})
+      .then(res => {
+        const persons = res.data;
+        this.setState({ leaderBoardResults:true, leaderBoard: res.data });
+      }, err=> {
+        
+        this.setState({ leaderBoardResults:true, err:true });
+      })
+  }
+
   componentDidMount() {
     Mario.StopMusic();
     let alreadyLoggedIn = window.localStorage.getItem('oracleID');
     if (!alreadyLoggedIn) {
       this.history.push('/');
     }
+
+    this.loadLeaderBoardReport();
   }
 
   renderTeamLeaderBoard() {
@@ -182,24 +201,31 @@ class LeaderBoardContainer extends Component {
        </div>
 
           <div className="play-info">
-            <button className="btn btn-success" onClick={() => this.playGame()}>Play Now</button>
+            <button className="btn btn-success" onClick={() => this.playGame()}> <i className="fa fa-send" /> Play</button>
+            <button className="btn btn-danger" onClick={() => this.logout()}><i className="fa fa-power-off" /></button>
           </div>
         </section>
+        {this.state.leaderBoardResults? 
 
-        <Tabs className="leaderboard-tabs" defaultActiveKey="myscore" id="battleground-mario-leaderboard">
+        !this.state.err? (<div className="loading">Sorry, Something is on fire...</div>) :
+        <section>
+        <Tabs className="leaderboard-tabs" defaultActiveKey="myscore" id="battleground-mario-leaderboard" >
           <Tab eventKey="myscore" title="Me & My Team">
             {this.renderMyScorecard()}
             {this.renderMyTeamScorecard()}
           </Tab>
         
-          <Tab eventKey="peopleboardscore" title="Rock Stars" >
+          <Tab eventKey="peopleboardscore" title="Top 10 Rock Stars" >
             {this.renderPeopleBoard()}
           </Tab>
           <Tab eventKey="leaderboardscore" title="LeaderBoard" >
             {this.renderTeamLeaderBoard()}
           </Tab>
         </Tabs>
-        <footer> <i class="fa fa-code"></i> Coded with <i class="fa fa-heart"></i> from XT & Rogers Team</footer>
+        <footer> <i className="fa fa-code"></i> with <i className="fa fa-heart"></i> from XT & Rogers Team</footer>
+        </section>
+        : (<div className="loading">Loading .. .. ..</div>)  }
+        
       </section>
     );
   }

@@ -10,6 +10,7 @@ Mario.Character = function() {
     this.Large = true;
     this.Fire = true;
     this.Coins = 0;
+    this.oneUpCount = 0;
     this.Lives = 3;
     this.LevelString = "none";
     this.GroundInertia = 0.89;
@@ -675,17 +676,25 @@ Mario.Character.prototype.Get1Up = function() {
     if (this.Lives === 99) {
         this.Lives = 99;
     }
-    this.GetCoin(25);
+   // this.GetCoin(25);
 };
 
 Mario.Character.prototype.GetCoin = function() {
+    var oneUpMark = 100;
     if ( arguments[0]){
         this.Coins += parseInt(arguments[0]);
     }else{
     this.Coins++;
     }
-    if (this.Coins === 100) {
+
+    var x = parseInt(this.Coins / oneUpMark);
+    if (x > this.oneUpCount ) {
         // this.Coins = 0;
         this.Get1Up();
+        console.log("Congratulations !!  You have ", Mario.MarioCharacter.Lives, " More lives");
+       // console.log("this Lives", this.Lives);
+        this.oneUpCount = x;
+
     }
+    // console.log( this.Coins);
 };

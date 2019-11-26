@@ -48,7 +48,7 @@ class HomeContainer extends Component {
         <section className="login-div">
           {template}
         </section>
-        <footer> <i class="fa fa-code"></i> with <i class="fa fa-heart"></i> from XT & Rogers Team</footer>
+       
       </section>
     );
   }
