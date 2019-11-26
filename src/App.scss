@@ -48,6 +48,8 @@
 }
 
 footer{
+  font-family: Arial, sans-serif;
+  text-align: center;
      background: #5E91FE;
     padding: 5px 10px;
     color: #fff;
@@ -148,6 +150,16 @@ body {
   left: 0;
 }
 
+.error{
+  font-family: Arial, sans-serif;
+  font-size: 85%;
+  background: red;
+  padding: 2px 10px;
+  color: #fff;
+  text-shadow: none;
+  margin-bottom: 20px;
+}
+
 /* Home Container Styles */
 .home-container{
   display:flex;
@@ -202,7 +214,7 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.5);
     display:flex;
     align-items: center;
-    margin-top:25%;
+    margin-top:5%;
   }  
   
   .team-name{
@@ -296,10 +308,10 @@ body {
   width:100%;
   display:flex;
   justify-content: space-between;
-  display:block;
+ //  display:block;
   @media (max-width: 576px) {
    flex-direction: column;
-   display:block;
+  // display:block;
   }
 
   .user-info{
@@ -310,14 +322,17 @@ body {
     border-radius: 0 0 10px 10px;
     border: 3px solid #fff;
     border-top: 0;
-    width:25%;
+    .team-name{
+      font-size:75%;
+    }
+    // width:25%;
    // @media (min-width: 576px) {
-      min-width:250px;
+     // min-width:250px;
     // }
   
-    display:flex;
-    align-items: center;
-    justify-content: center;
+    // display:flex;
+    // align-items: center;
+    // justify-content: center;
     float:left;
 }
 

@@ -28,11 +28,15 @@ class LeaderBoardContainer extends Component {
   loadLeaderBoardReport(){
     axios.get('/leaderboard', {params:{oracleID: this.state.oracleID }})
       .then(res => {
-        const persons = res.data;
+        if (res.data.status==="SUCCESS"){
         this.setState({ leaderBoardResults:true, leaderBoard: res.data });
+        }else{
+          this.setState({ err:true });
+        }
+
       }, err=> {
         
-        this.setState({ leaderBoardResults:true, err:true });
+        this.setState({ err:true });
       })
   }
 
@@ -47,7 +51,7 @@ class LeaderBoardContainer extends Component {
   }
 
   renderTeamLeaderBoard() {
-
+    let teamLeaderboard = this.state.leaderBoard.teamLeaderBoard;
     return (
 
       <div className="card" >
@@ -57,26 +61,26 @@ class LeaderBoardContainer extends Component {
         <div className="card-body">
           {
 
-            this.teamNames.map((team, index) => {
+            teamLeaderboard.map((team, index) => {
 
               return (
                 <div className="row team-report" key={'team-' + index}>
                   <div className="col-sm-6 col-12">
                     <div className="team-name">
-                    <img className="team-logo" src={"/images/battleground/"+team.toLowerCase().replace(" ","-")+ ".png"} alt="{team}" />
+                    <img className="team-logo" src={"/images/battleground/"+team.teamName.toLowerCase().replace(" ","-")+ ".png"} alt="{team.teamName}" />
                       </div>
                   </div>
                   <div className="col-sm-6 col-12">
                     <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
-                    17856
+                    {team.totalScore}
     </div>
                   <div className="col-sm-12 col-md-6 col-12">
-                    Attempts :: 
-                    725
+                    Score :: 
+                    {team.totalScore}
     </div>
                   <div className="col-sm-12 col-md-6 col-12">
-                    Max World :: 
-                    7
+                    Total Players :: 
+                    {team.totalPlayers}
 
     </div>
               
@@ -93,7 +97,7 @@ class LeaderBoardContainer extends Component {
   }
 
   renderPeopleBoard() {
-
+    let rockStars = this.state.leaderBoard.rockStars;
     return (
 
       <div className="card">
@@ -103,24 +107,24 @@ class LeaderBoardContainer extends Component {
         <div className="card-body">
           {
 
-            this.teamNames.map((team, index) => {
+              rockStars.map((person, index) => {
               let pstyle= {backgroundImage : "url()"};
               return (
-                <div className="row people-board" key={'people-' + index} style={pstyle}>
-                  <img className="team-logo" src={"/images/battleground/"+team.toLowerCase().replace(' ','-') +".png"} alt={team} />
+                <div className="row people-board" key={'person-' + index} style={pstyle}>
+                  <img className="team-logo" src={"/images/battleground/"+person.teamName.toLowerCase().replace(' ','-') +".png"} alt={person.teamName} />
                   <div className="col-sm-12">
-                    <div className="team-name">{team}</div>
+                    <div className="team-name">{person.name}</div>
 
                   </div>
                   <div className="col-sm-4 col-12">
                   <br/>
                     <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
-                    17856
+                    {person.totalCoinsCollected}
     </div>
                   <div className="col-sm-8 col-12">
-                  Max World :: 7
+                  Max World :: {person.highestWorldReached}-{person.highestLevelReached}
                    <br/> <br/>
-                      Attempts ::  725
+                      Score ::  {person.totalScore}
                    
                   </div>
             
@@ -163,7 +167,7 @@ class LeaderBoardContainer extends Component {
   }
 
   renderMyScorecard() {
-
+   var myscore = this.state.leaderBoard.individualScore;
     return (
       <div className="myscore card">
         <div className="card-header">
@@ -175,11 +179,11 @@ class LeaderBoardContainer extends Component {
           <div className="col-sm-4 col-12">
           <br/>
               <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
-              1200
+              {myscore.totalCoinsCollected}
     </div>
             <div className="col-sm-8 col-12">
-              Attempts :: 125 <br/> <br/>
-              Max World :: 5
+              Score :: {myscore.totalScore} <br/> <br/>
+              Max World :: {myscore.highestWorldReached}-{myscore.highestLevelReached}
 
     </div>
             
@@ -194,10 +198,14 @@ class LeaderBoardContainer extends Component {
   render() {
 
     return (
-      <section className="leaderboard-container container">
+     
+      <section className="leaderboard-container">
+         { this.state.leaderBoardResults? 
+         <section className="container" >
         <section className="greeting">
           <div className="user-info">
-            Howdy Abhishek
+           {this.state.leaderBoard.individualScore.name}<br/>
+         
        </div>
 
           <div className="play-info">
@@ -205,9 +213,7 @@ class LeaderBoardContainer extends Component {
             <button className="btn btn-danger" onClick={() => this.logout()}><i className="fa fa-power-off" /></button>
           </div>
         </section>
-        {this.state.leaderBoardResults? 
 
-        !this.state.err? (<div className="loading">Sorry, Something is on fire...</div>) :
         <section>
         <Tabs className="leaderboard-tabs" defaultActiveKey="myscore" id="battleground-mario-leaderboard" >
           <Tab eventKey="myscore" title="Me & My Team">
@@ -224,9 +230,9 @@ class LeaderBoardContainer extends Component {
         </Tabs>
         <footer> <i className="fa fa-code"></i> with <i className="fa fa-heart"></i> from XT & Rogers Team</footer>
         </section>
-        : (<div className="loading">Loading .. .. ..</div>)  }
-        
-      </section>
+        </section>
+        :  (this.state.err? (<div className="loading"> <div className="error">Sorry!! <br/> Seems something is on fire. Rescue is on its way. </div></div>) :  (<div className="loading">Loading .. .. ..</div>) ) }
+      </section>        
     );
   }
 }

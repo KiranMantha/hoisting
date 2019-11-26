@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Mario from "./game/mario/code/setup.js";
+import axios from 'axios';
 
 class HomeContainer extends Component {
 
@@ -18,24 +19,46 @@ class HomeContainer extends Component {
     }
   }
 
-  doLogin() {
-    window.localStorage.setItem('oracleID', this.state.oracleID);
-    this.history.push('/leaderboard');
+  setErrorState(){
+    let super1 = this;
+    this.setState({ err:true, oracleID:'', loading:false });
+    
+    setTimeout(()=>{this.setState({err:false})} , 5000);
+  }
+
+  doLogin(event) {
+    event.preventDefault();
+    this.setState({loading:true});
+    axios.get('/login', {params:{oracleID: this.state.oracleID }})
+        .then(res => {
+         
+          if (res.data.status==="SUCCESS"){
+          window.localStorage.setItem('oracleID', this.state.oracleID);
+          this.history.push('/leaderboard');
+          }else{
+           this.setErrorState();
+          }
+        }, err=> {
+          this.setErrorState();
+        })
+   
   }
 
   render() {
     let template = '';
     
     if (!window.localStorage.getItem('timeup')) {
-      template = <form className="form-signin" onSubmit={() => this.doLogin()}>
-       
+      template = <form className="form-signin" onSubmit={(e) => this.doLogin(e)}>
+        {
+      ( this.state.err===true) ?  <div className="error"> <i className="fa fa-warning" /> Invalid Oracle ID</div> : ''
+        }
         <div className="form-label-group">
           <label htmlFor="oracleID">Enter your OracleID</label>
-          <input type="text" id="oracleID" className="form-control" placeholder="e.g. 128687" required="" autoFocus="" onChange={(e) => this.setState({ oracleID: e.target.value })} />
+          <input type="text" id="oracleID" className="form-control" placeholder="e.g. 128687" required="" autoFocus="" value={this.state.oracleID} onChange={(e) => this.setState({ oracleID: e.target.value })} />
 
         </div>
 
-        <button className="btn btn-lg btn-success btn-block" type="submit" >Login</button>
+        <button className="btn btn-lg btn-success btn-block" type="submit" disabled = {this.state.loading} >Login</button>
 
       </form>;
     } else {
