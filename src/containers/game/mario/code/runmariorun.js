@@ -19,14 +19,23 @@ Mario.runMarioRun = function(){
       });
 
       $(document).on('enterGame', function(){
+          console.log("Game::  Entering Game --  Increase Attemp count");
           $('#control-collection').show();
           $('#btnTop').show();
           $('#btnBottom').show();
       });
 
-      $(document).on('enterLevel', function() {
+      $(document).on('enterLevel', function(e, params) {
+
+        console.log("Game::  Entering Level --  Increase Level count", e, params);
           $('#btnTop').hide();
           $('#btnBottom').hide();
+      });
+
+      $(document).on('exitLevel', function(e, params) {
+        Mario.StopMusic();
+        console.log("Game::  Exiting Level --  Increase Level count", e, params);
+         
       });
 
        $(document).ready(function () {

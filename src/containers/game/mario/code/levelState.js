@@ -81,11 +81,11 @@ Mario.LevelState.prototype.Enter = function() {
 
 	this.GotoMapState = false;
     this.GotoLoseState = false;
-    $(document).trigger('enterLevel');
+    $(document).trigger('enterLevel', {coins: Mario.MarioCharacter.Coins, level: Mario.MarioCharacter.LevelString, lives: Mario.MarioCharacter.Lives});
 };
 
 Mario.LevelState.prototype.Exit = function() {
-
+    $(document).trigger('exitLevel', {coins: Mario.MarioCharacter.Coins, level: Mario.MarioCharacter.LevelString, lives:Mario.MarioCharacter.Lives });   
     delete this.Level;
     delete this.Layer;
     delete this.BgLayer;

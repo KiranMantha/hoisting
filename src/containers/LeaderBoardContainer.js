@@ -56,7 +56,7 @@ class LeaderBoardContainer extends Component {
                     725
     </div>
                   <div className="col-sm-12 col-md-6 col-12">
-                    Highest Level :: 
+                    Max World :: 
                     7
 
     </div>
@@ -99,7 +99,7 @@ class LeaderBoardContainer extends Component {
                     17856
     </div>
                   <div className="col-sm-8 col-12">
-                  Highest Level :: 7
+                  Max World :: 7
                    <br/> <br/>
                       Attempts ::  725
                    
@@ -133,7 +133,7 @@ class LeaderBoardContainer extends Component {
             <div className="col-sm col-12">
               Attempts :: 725 <br/> <br/>
     
-              Highest Level :: 7
+              Max World :: 7
 
     </div>
            
@@ -160,7 +160,7 @@ class LeaderBoardContainer extends Component {
     </div>
             <div className="col-sm-8 col-12">
               Attempts :: 125 <br/> <br/>
-              Highest Level :: 5
+              Max World :: 5
 
     </div>
             
@@ -199,7 +199,7 @@ class LeaderBoardContainer extends Component {
             {this.renderTeamLeaderBoard()}
           </Tab>
         </Tabs>
-
+        <footer> <i class="fa fa-code"></i> Coded with <i class="fa fa-heart"></i> from XT & Rogers Team</footer>
       </section>
     );
   }

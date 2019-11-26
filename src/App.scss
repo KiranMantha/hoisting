@@ -47,12 +47,32 @@
    font-size:75%;
 }
 
+footer{
+     background: #5E91FE;
+    padding: 5px 10px;
+    color: #fff;
+    border: 3px solid #fff;
+    border-bottom: none;
+    font-size: 75%;
+    box-shadow: -2px -3px 3px rgba(0,0,0,0.5);
+    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+
+    .fa-heart{
+      color:red;
+    }
+    .fa-code{
+      color:#000;
+    }
+
+}
+
 body {
   font-family: 'Super Mario 256';
   background:url(/images/overworld-bg1.png) #5e91fe;
   background-repeat: repeat-x;
   background-attachment: fixed;
   background-position: bottom;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.5);
 
 &.black-bg{
 
@@ -197,6 +217,7 @@ body {
       border-bottom: 1px solid #CB4F23;
       margin-bottom:45px; 
       flex-direction:row;
+      min-height:45px;
     &:before{
       content:"";
         background: url(/images/header-bg.png) repeat-x;
@@ -232,6 +253,7 @@ body {
       border:3px solid #fff;
       border-radius: 0 0 10px 10px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      display:block;
     
       .nav-link {
         margin-right:0px;
@@ -262,6 +284,7 @@ body {
   width:100%;
   display:flex;
   justify-content: space-between;
+  display:block;
   @media (max-width: 576px) {
    flex-direction: column;
    display:block;

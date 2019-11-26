@@ -106,6 +106,7 @@ Mario.Character.prototype.SetLarge = function(large, fire) {
     this.Blink(true);
 };
 
+//  Seems this is Fire
 Mario.Character.prototype.Blink = function(on) {
     this.Large = on ? this.NewLarge : this.LastLarge;
     this.Fire = on ? this.NewFire : this.LastFire;
@@ -572,9 +573,12 @@ Mario.Character.prototype.Stomp = function(object) {
             this.InvulnerableTime = 1;
         }
     }
+
+    this.GetCoin(5);
 };
 
 Mario.Character.prototype.GetHurt = function() {
+     //   Hack it  -- here  for Not getting hurt;
     if (this.DeathTime > 0 || this.World.Paused) {
         return;
     }
@@ -624,8 +628,9 @@ Mario.Character.prototype.GetFlower = function() {
         this.PowerUpTime = 18;
         Enjine.Resources.PlaySound("powerup");
         this.SetLarge(true, true);
+        this.GetCoin(10);
     } else {
-        this.GetCoin();
+        this.GetCoin(10);
         Enjine.Resources.PlaySound("coin");
     }
 };
@@ -641,9 +646,10 @@ Mario.Character.prototype.GetMushroom = function() {
         Enjine.Resources.PlaySound("powerup");
         this.SetLarge(true, false);
     } else {
-        this.GetCoin();
+      
         Enjine.Resources.PlaySound("coin");
     }
+    this.GetCoin(10);
 };
 
 Mario.Character.prototype.Kick = function(shell) {
@@ -657,7 +663,10 @@ Mario.Character.prototype.Kick = function(shell) {
     } else {
         Enjine.Resources.PlaySound("kick");
         this.InvulnerableTime = 1;
+       
     }
+    this.GetCoin(5);
+ 
 };
 
 Mario.Character.prototype.Get1Up = function() {
@@ -666,12 +675,17 @@ Mario.Character.prototype.Get1Up = function() {
     if (this.Lives === 99) {
         this.Lives = 99;
     }
+    this.GetCoin(25);
 };
 
 Mario.Character.prototype.GetCoin = function() {
+    if ( arguments[0]){
+        this.Coins += parseInt(arguments[0]);
+    }else{
     this.Coins++;
+    }
     if (this.Coins === 100) {
-        this.Coins = 0;
+        // this.Coins = 0;
         this.Get1Up();
     }
 };
