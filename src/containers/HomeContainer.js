@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Mario from "./game/mario/code/setup.js";
 import axios from 'axios';
+import {CONFIG} from './../config';
 
 class HomeContainer extends Component {
 
@@ -29,7 +30,7 @@ class HomeContainer extends Component {
   doLogin(event) {
     event.preventDefault();
     this.setState({loading:true});
-    axios.get('/login', {params:{oracleID: this.state.oracleID }})
+    axios.get(CONFIG.API_PREFIX+'/login', {params:{oracleId: this.state.oracleID }})
         .then(res => {
          
           if (res.data.status==="SUCCESS"){
@@ -69,6 +70,7 @@ class HomeContainer extends Component {
     return (
       <section className="home-container container">
         <section className="login-div">
+          <img src="/logo192.png" alot="Year end Mario" className="logo"/>
           {template}
         </section>
        

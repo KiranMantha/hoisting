@@ -2,6 +2,7 @@
 
 import Enjine from './../Enjine/core.js';
 import Mario from './setup.js';
+import {CONFIG} from './../../../../config';
 
 import $ from "jquery";
 
@@ -32,7 +33,7 @@ Mario.runMarioRun = function(){
       });
 
       $(document).on('enterLevel', function(e, params) {
-
+        $.ajax( {url: CONFIG.API_PREFIX+'/attempts?oracleId='+window.localStorage.getItem('oracleID'), contentType:"application/json", type:"PUT"});
         console.log("Game::  Entering Level --  Increase Level count", e, params);
           $('#btnTop').hide();
           $('#btnBottom').hide();
@@ -53,7 +54,7 @@ Mario.runMarioRun = function(){
         window.localStorage.setItem('coins', parseInt(params.coins));
         console.log("Coins Collected in this level are ", coins);
 
-        $.ajax( {url:'/score', type:"PUT", data: {coinsCollected: coins, level: params.level }})
+        $.ajax( {url: CONFIG.API_PREFIX+'/score?oracleId='+window.localStorage.getItem('oracleID'), type:"PUT", contentType:"application/json; charset=utf-8", data: JSON.stringify({coinsCollected: coins, level: params.level })});
         console.log("Total Coins Collected in this attempt is ", window.localStorage.getItem('coins'));
          
       });
