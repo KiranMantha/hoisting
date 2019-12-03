@@ -47,6 +47,14 @@
    font-size:75%;
 }
 
+.star-performer{
+  width:40px;
+  height:40px;
+  background:url(/images/gold-star-40.png) repeat-x;
+  margin: 0 auto 10px auto;
+  
+}
+
 footer{
   div{
   font-family: Arial, sans-serif;
@@ -62,7 +70,7 @@ footer{
     display: block;
     margin: 0 auto;
     width: auto;
-    max-width: 300px;
+    max-width: 400px;
     border-radius:5px 5px 0 0;
     .fa-heart{
       color:red;
@@ -317,6 +325,7 @@ body {
    // display:flex;
     .tab-pane{
       width:100%;
+      min-height:375px;
     //  display:flex;
      // align-items: center;
      // flex-direction: column;
@@ -430,7 +439,9 @@ body {
       }
       &.people-board{
         padding-bottom:20px;
-       
+        .star-performer{
+          margin-left:0;
+        }
         .team-name{
            background: green; 
         }

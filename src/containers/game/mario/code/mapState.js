@@ -17,7 +17,7 @@ Mario.MapTile = {
 Mario.MapState = function() {
     this.camera = new Enjine.Camera();
 
-    this.Level = [];
+    this.Level = [1,2];
     this.Data = [];
     this.XMario = 0; this.YMario = 0;
     this.XMarioA = 0; this.YMarioA = 0;
@@ -35,8 +35,10 @@ Mario.MapState = function() {
     this.LevelDifficulty = 0;
     this.LevelType = 0;
 
-    this.WorldNumber = -1;
+    this.WorldNumber = 2 - 2 ;
+   
     this.NextWorld();
+    
 };
 
 Mario.MapState.prototype = new Enjine.GameState();

@@ -32,7 +32,7 @@ Mario.Character = function() {
     this.Height = 24;
     
     //Level scene
-    this.World = null;
+    this.World = 2;
     this.Facing = 0;
     this.PowerUpTime = 0;
     

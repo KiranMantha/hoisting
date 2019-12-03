@@ -53,6 +53,7 @@ class LeaderBoardContainer extends Component {
 
   renderTeamLeaderBoard() {
     let teamLeaderboard = this.state.leaderBoard.teamLeaderBoard;
+    let stars = [3,2,1];
     return (
 
       <div className="card" >
@@ -74,7 +75,9 @@ class LeaderBoardContainer extends Component {
                   <div className="col-sm-6 col-12">
                     {
                       // <img src="/images/coin-spinner.gif" width="45" alt="Coins Collected" /> 
-                    }<br />
+                    }
+                     {(index<=2)? this.printStar(stars[index]):''}
+
                     Total Score ::
                     {team.totalScore}
 
@@ -102,8 +105,16 @@ class LeaderBoardContainer extends Component {
     );
   }
 
+  printStar(count){
+    let styleObj= {width:(count*40)+'px'};
+    return(
+     <div className="star-performer" style={styleObj}></div>
+    );
+  }
+
   renderPeopleBoard() {
     let rockStars = this.state.leaderBoard.rockStars;
+    let stars = [3,2,1];
     return (
 
       <div className="card">
@@ -120,7 +131,7 @@ class LeaderBoardContainer extends Component {
                   <img className="team-logo" src={"/images/battleground/" + person.teamName.toLowerCase().replace(' ', '-') + ".png"} alt={person.teamName} />
                   <div className="col-sm-12">
                     <div className="team-name">{person.name}</div>
-
+                        {(index<=2)? this.printStar(stars[index]):''}
                   </div>
                   <div className="col-sm-4 col-12">
                     <br />
@@ -242,7 +253,7 @@ class LeaderBoardContainer extends Component {
                   {this.renderTeamLeaderBoard()}
                 </Tab>
               </Tabs>
-              <footer> <div><i className="fa fa-code"></i> with <i className="fa fa-heart"></i> from XT & Rogers Team </div></footer>
+              <footer> <div><i className="fa fa-code"></i> with <i className="fa fa-heart"></i> from Game Design, XT & Rogers Team </div></footer>
             </section>
           </section>
           : (this.state.err ? (<div className="loading"> <div className="error">Sorry!! <br /> Seems something is on fire. Rescue is on its way. </div></div>) : (<div className="loading">Loading .. .. ..</div>))}
