@@ -48,7 +48,7 @@ Enjine.KeyboardInput = {
         var isGameStarted = false;
         var el =   window.document ||  window.document.body ||   window;
         el.onkeydown = function (event) {
-            self.KeyDownEvent(event);
+            self.KeyDownEvent(event);    
         }
         el.onkeyup = function (event) {
             self.KeyUpEvent(event);

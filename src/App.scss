@@ -501,11 +501,18 @@ body {
 
 .mario-game {
 
+  .show{
+    display:block;
+  }
+  .hidden{
+    display:none;
+  }
   width:100vw;
   height:100vh;
   display:flex;
   align-items:center;
   justify-content: center;
+  flex-direction:column;
 
   .go-back{
     position: absolute;

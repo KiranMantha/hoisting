@@ -615,7 +615,10 @@ Mario.Character.prototype.Die = function() {
     this.YDeathPos = this.Y | 0;
     this.World.Paused = true;
     this.DeathTime = 1;
+    
+    Enjine.Resources.PauseAll();
     Enjine.Resources.PlaySound("death");
+    
     this.SetLarge(false, false);
 };
 
@@ -680,7 +683,7 @@ Mario.Character.prototype.Get1Up = function() {
 };
 
 Mario.Character.prototype.GetCoin = function() {
-    var oneUpMark = 100;
+    var oneUpMark = 10;
     if ( arguments[0]){
         this.Coins += parseInt(arguments[0]);
     }else{

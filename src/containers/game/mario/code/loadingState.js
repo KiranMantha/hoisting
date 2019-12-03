@@ -62,8 +62,13 @@ Mario.LoadingState.prototype.Enter = function() {
     var testAudio = new Audio();
 	
     if (testAudio.canPlayType("audio/mp3")) {
-    	Enjine.Resources.AddSound("1up", "sounds/1-up.mp3", 1)
-		    .AddSound("breakblock", "sounds/breakblock.mp3")
+        console.log("ABLE TO PLAY MP3 FILES");
+        Enjine.Resources.AddSound("1up", "sounds/1-up.mp3", 1)
+            .AddSound("title", "sounds/smwtitle.mp3", 1)
+            .AddSound("mapmusic", "sounds/mapmusic.mp3", 1)
+            .AddSound("background", "sounds/background.mp3", 1)
+            .AddSound("underground", "sounds/underground.mp3", 1)
+		    .AddSound("breakblock", "sounds/breakblock.mp3",1)
 		    .AddSound("bump", "sounds/bump.mp3", 4)
 		    .AddSound("cannon", "sounds/cannon.mp3")
 		    .AddSound("coin", "sounds/coin.mp3", 5)
@@ -76,9 +81,12 @@ Mario.LoadingState.prototype.Enter = function() {
 		    .AddSound("powerdown", "sounds/powerdown.mp3", 1)
 		    .AddSound("powerup", "sounds/powerup.mp3", 1)
 		    .AddSound("sprout", "sounds/sprout.mp3", 1)
-		    .AddSound("stagestart", "sounds/stagestart.mp3", 1)
+            .AddSound("stagestart", "sounds/stagestart.mp3", 1)
+            .AddSound("castle", "sounds/castle.mp3", 1)
 		    .AddSound("stomp", "sounds/stomp.mp3", 2);
     } else {
+
+        console.log("ABLE TO PLAY ONLY WAV FILES");
 	    Enjine.Resources.AddSound("1up", "sounds/1-up.wav", 1)
 		    .AddSound("breakblock", "sounds/breakblock.wav")
 		    .AddSound("bump", "sounds/bump.wav", 2)

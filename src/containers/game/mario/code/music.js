@@ -18,41 +18,53 @@ var midifiles = {
 };
 
 Mario.PlayMusic = function(name) {
-	if(name in midifiles)
-	{
-		// Currently we stop all playing tracks when playing a new one
-		// MIDIjs can't play multiple at one time
-		MIDIjs.stop();
-		setTimeout(function(){
-		try{
-		MIDIjs.play(midifiles[name]);
-		}catch(ex){};
-	},1000);
-	}else{
-		console.error("Cannot play music track " + name + " as i have no data for it.");
-	}
+	// if(name in midifiles)
+	// {
+	// 	// Currently we stop all playing tracks when playing a new one
+	// 	// MIDIjs can't play multiple at one time
+	// 	MIDIjs.stop();
+	// 	setTimeout(function(){
+	// 	try{
+	// 	MIDIjs.play(midifiles[name]);
+	// 	}catch(ex){};
+	// },1000);
+	// }else{
+	// 	console.error("Cannot play music track " + name + " as i have no data for it.");
+	// }
+	console.log("Playing only MP3 files")
 };
 
 Mario.PlayTitleMusic = function() {
-	Mario.PlayMusic("title");
+	// Mario.PlayMusic("title");
+	Enjine.Resources.PauseAll();
+	Enjine.Resources.PlaySound('title');
 };
 
 Mario.PlayMapMusic = function() {
-	Mario.PlayMusic("map");
+	// Mario.PlayMusic("map");
+	Enjine.Resources.PauseAll();
+	Enjine.Resources.PlaySound('mapmusic',true);
 };
 
 Mario.PlayOvergroundMusic = function() {
-	Mario.PlayMusic("background");
+	Enjine.Resources.PauseAll();
+	// Mario.PlayMusic("background");
+	Enjine.Resources.PlaySound('background');
 };
 
 Mario.PlayUndergroundMusic = function() {
-	Mario.PlayMusic("underground");
+	// Mario.PlayMusic("underground");
+	Enjine.Resources.PauseAll();
+	Enjine.Resources.PlaySound('underground');
 };
 
 Mario.PlayCastleMusic = function() {
-	Mario.PlayMusic("castle");
+	// Mario.PlayMusic("castle");
+	Enjine.Resources.PauseAll();
+	Enjine.Resources.PlaySound('castle');
 };
 
 Mario.StopMusic = function() {
-	MIDIjs.stop();
+	Enjine.Resources.PauseAll();
+	// MIDIjs.stop();
 };

@@ -35,7 +35,8 @@ Mario.MapState = function() {
     this.LevelDifficulty = 0;
     this.LevelType = 0;
 
-    this.WorldNumber = 2 - 2 ;
+    let wp = parseInt(window.localStorage.getItem('wp')) || 1;
+    this.WorldNumber = wp - 2 ;
    
     this.NextWorld();
     

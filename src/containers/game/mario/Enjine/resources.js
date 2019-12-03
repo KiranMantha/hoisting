@@ -94,6 +94,21 @@ Enjine.Resources = {
     	}
     	return this;
     },
+
+    PauseAll: function() {
+
+        if ( Object.keys(this.Sounds).length>0){
+        for (var sound in this.Sounds) {
+    	for (var i = 0; i < this.Sounds[sound].length; i++) {
+    		if (!this.Sounds[sound][i].paused) {
+                this.Sounds[sound][i].currentTime = 0;
+    			this.Sounds[sound][i].pause();
+    		}
+        }
+    };
+}
+    	return this;
+    },
     
     ResetChannel: function(name, index) {
     	this.Sounds[name][index].currentTime = 0;

@@ -31,6 +31,7 @@ class LeaderBoardContainer extends Component {
       .then(res => {
         if (res.data.status === "SUCCESS") {
           this.setState({ leaderBoardResults: true, leaderBoard: res.data });
+          window.localStorage.setItem('wp', res.data.individualScore.highestWorldReached);
         } else {
           this.setState({ err: true });
         }

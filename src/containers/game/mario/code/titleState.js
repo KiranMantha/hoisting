@@ -37,8 +37,9 @@ Mario.TitleState.prototype.Enter = function() {
     this.font = Mario.SpriteCuts.CreateRedFont();
     
     this.font.Strings[0] = { String: "Press S to Start", X: 96, Y: 110 };
-    this.font.Strings[1] = { String: "(S) Jump  (A)Fire", X: 96, Y: 120};
-
+    this.font.Strings[1] = { String: "(S) Jump  (A) Fire", X: 96, Y: 120};
+    // this.font.Strings[2] = { String: "(M) BG Music on/off", X: 96, Y: 130};
+    
     this.logoY = 20;
 
     this.drawManager.Add(bgLayer0);
@@ -51,7 +52,7 @@ Mario.TitleState.prototype.Enter = function() {
 	Mario.MarioCharacter = new Mario.Character();
 	Mario.MarioCharacter.Image = Enjine.Resources.Images["smallMario"];
 
-    Mario.PlayTitleMusic();
+     Mario.PlayTitleMusic();
 };
 
 Mario.TitleState.prototype.Exit = function() {
@@ -86,5 +87,11 @@ Mario.TitleState.prototype.CheckForChange = function(context) {
         context.ChangeState(Mario.GlobalMapState);
         $(document).trigger('enterAttempt');
         $(document).trigger('enterGame');
+    }
+
+    if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.M)) {
+     //   context.ChangeState(Mario.GlobalMapState);
+        $(document).trigger('muteGameSound');
+        
     }
 };

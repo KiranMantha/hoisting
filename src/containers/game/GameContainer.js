@@ -2,17 +2,39 @@ import React, { Component } from 'react';
 import DeviceOrientation, { Orientation } from 'react-screen-orientation';
 import { withRouter } from 'react-router-dom';
 import Mario from "./mario/code/setup.js";
+import axios from 'axios';
+import { CONFIG } from './../../config';
 
 class GameContainer extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { oracleID: window.localStorage.getItem('oracleID'), disableButton:true };
+        this.state = { oracleID: window.localStorage.getItem('oracleID'), disableButton:true, loading:true };
         this.history = this.props.history;
         if (window.screen.orientation.type.indexOf('landscape') === 0) {
             document.querySelector('body').setAttribute('class', 'black-bg');
         }
 
+    }
+    validateGameWorld(){
+        axios.get(CONFIG.API_PREFIX + '/leaderBoard', { params: { oracleID: this.state.oracleID } })
+        .then(res => {
+            if (res.data.status === "SUCCESS") {
+              window.localStorage.setItem('wp', res.data.individualScore.highestWorldReached);
+              this.startGame();
+
+            }
+        } , err => {
+
+                this.setState({ err: true });
+                this.history.push('/');
+          });
+    }
+
+    startGame(){
+        setTimeout( ()=>{ 
+            Mario.runMarioRun(); 
+            this.setState({disableButton:false, loading:false})}, 2000);
     }
 
     componentDidMount() {
@@ -25,7 +47,7 @@ class GameContainer extends Component {
         window.addEventListener('orientationchange',  this.onOrientationChange);
         if (window.screen.orientation.type.indexOf('landscape') === 0) {
           //  window.rMR = {};
-            setTimeout( ()=>{Mario.runMarioRun(); this.setState({disableButton:false})}, 2000);
+           this.validateGameWorld();
         }else{
             this.setState({disableButton:false});
         }
@@ -44,6 +66,12 @@ class GameContainer extends Component {
             }
         }
     }
+    goBack(){
+        window.rMR = null;
+        Mario.StopMusic();
+        this.history.push('/')
+        document.querySelector('body').removeAttribute('class');
+    }
 
     componentWillUnmount() {
         window.rMR = null;
@@ -53,10 +81,13 @@ class GameContainer extends Component {
     render() {
         window.screen.orientation.onchange = this.onOrientationChange();
         return (
-            <section className="mario-game">
+            <section className="mario-game ">
                    
-                <button className="btn btn-secondary btn-sm go-back " disabled={this.state.disableButton} onClick={() => this.history.push('/')}><i className="fa fa-chevron-left"></i> Back</button>
-                <DeviceOrientation lockOrientation={'landscape'}>
+                <button className="btn btn-secondary btn-sm go-back " disabled={this.state.disableButton} onClick={() => this.goBack()}><i className="fa fa-chevron-left"></i> Back</button>
+
+             <div className= { this.state.loading===true? 'show':'hidden'}><img src="/images/spinner.gif" alt="Loading ..." /> <br/></div>
+        
+                <DeviceOrientation lockOrientation={'landscape'} className= { this.state.loading===false? 'show':'hidden'}  >
                     <Orientation orientation='landscape' alwaysRender={false}>
                    
                         <canvas id="canvas" width="640" height="480">
@@ -77,7 +108,7 @@ class GameContainer extends Component {
                             <button className="btn btn-success right-controls" id="btnJump" data-type="83">S</button>
 
                         </div>
-
+                   
                     </Orientation>
                     <Orientation orientation='portrait' alwaysRender={false}>
                         <div className="cant-play">
@@ -85,6 +116,7 @@ class GameContainer extends Component {
                         </div>
                     </Orientation>
                 </DeviceOrientation>
+            
             </section>
         );
     }
