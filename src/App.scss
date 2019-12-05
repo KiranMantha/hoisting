@@ -271,7 +271,7 @@ body {
       min-height:45px;
     &:before{
       content:"";
-        background: url(/images/header-bg.png) repeat-x;
+        background: url(/images/header-bg.png) repeat;
     position: absolute;
     z-index: -1;
     width: 100%;
@@ -367,8 +367,9 @@ body {
 
 .play-info{
   float:right;
-  .btn-success{
-    margin-right:10px;
+  text-align:right;
+  .btn-danger{
+    margin-left:10px;
    
   }
   @media (max-width: 576px) {
@@ -481,7 +482,7 @@ body {
    
     &:before{
       content:"";
-        background: url(/images/header-bg.png) repeat-x;
+        background: url(/images/header-bg.png) repeat;
     position: absolute;
     z-index: -1;
     width: 100%;
@@ -501,6 +502,22 @@ body {
 
 .mario-game {
 
+  .music {
+
+    background: url(/images/sound.png) no-repeat;
+    width: 48px;
+    height: 51px;
+    position:absolute;
+    right:5px;
+    top:5px;
+    outline: none !important;
+    box-shadow: none !important;
+    background-position: left;
+
+    &.off{
+      background-position: right;
+    }
+  }
   .show{
     display:block;
   }

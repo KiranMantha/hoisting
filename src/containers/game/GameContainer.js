@@ -9,12 +9,11 @@ class GameContainer extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { oracleID: window.localStorage.getItem('oracleID'), disableButton:true, loading:true };
+        this.state = { oracleID: window.localStorage.getItem('oracleID'), disableButton:true, loading:true,music:true };
         this.history = this.props.history;
-        if (window.screen.orientation.type.indexOf('landscape') === 0) {
+       
             document.querySelector('body').setAttribute('class', 'black-bg');
-        }
-
+        
     }
     validateGameWorld(){
         axios.get(CONFIG.API_PREFIX + '/leaderBoard', { params: { oracleID: this.state.oracleID } })
@@ -57,11 +56,13 @@ class GameContainer extends Component {
         // console.log(e);
         if (e) {
             if (e.target.screen.orientation.type.indexOf('landscape') === 0) {
-                document.querySelector('body').setAttribute('class', 'black-bg');
+               
                 setTimeout( ()=>{Mario.runMarioRun();  }, 2000);
             } else {
                 Mario.StopMusic();
-                document.querySelector('body').removeAttribute('class');
+                if(Mario.playBgMusic){
+                    Mario.PauseBG();
+                    }
                
             }
         }
@@ -69,13 +70,28 @@ class GameContainer extends Component {
     goBack(){
         window.rMR = null;
         Mario.StopMusic();
-        this.history.push('/')
-        document.querySelector('body').removeAttribute('class');
+        if(Mario.playBgMusic){
+        Mario.PauseBG();
+        }
+        this.setState({loading:true});
+        //document.querySelector(".game-container").innerHTML ="";
+        //document.querySelector('body').removeAttribute('class');
+         window.location.href ="/leaderboard";
+        // this.history.push('/leaderboard');
+    }
+
+    stopMusic(){
+        this.setState({music:!this.state.music},()=>{
+            Mario.PauseBG();
+        });
+        
     }
 
     componentWillUnmount() {
         window.rMR = null;
-        Mario.StopMusic();
+        if(Mario.playBgMusic){
+            Mario.PauseBG();
+            }
         document.querySelector('body').removeAttribute('class');
     }
     render() {
@@ -84,11 +100,12 @@ class GameContainer extends Component {
             <section className="mario-game ">
                    
                 <button className="btn btn-secondary btn-sm go-back " disabled={this.state.disableButton} onClick={() => this.goBack()}><i className="fa fa-chevron-left"></i> Back</button>
+                <button className={this.state.music? 'btn music ' : 'btn music  off'} disabled={this.state.disableButton} onClick={() => this.stopMusic()}></button>
 
              <div className= { this.state.loading===true? 'show':'hidden'}><img src="/images/spinner.gif" alt="Loading ..." /> <br/></div>
         
-                <DeviceOrientation lockOrientation={'landscape'} className= { this.state.loading===false? 'show':'hidden'}  >
-                    <Orientation orientation='landscape' alwaysRender={false}>
+                <DeviceOrientation lockOrientation={'landscape'}   >
+                    <Orientation orientation='landscape' alwaysRender={false} className= { this.state.loading===false? 'game-container show':'game-container hidden'}>
                    
                         <canvas id="canvas" width="640" height="480">
                             <p>Your browser does not support the canvas element.</p>

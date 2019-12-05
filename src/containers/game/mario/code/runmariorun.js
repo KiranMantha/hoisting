@@ -24,7 +24,7 @@ Mario.runMarioRun = function(){
       });
       $(document).on('enterAttempt', function(){
 
-        console.log("Attempt Count Increased");
+       //  console.log("Attempt Count Increased");
         window.localStorage.setItem('coins',0);
 
        });
@@ -50,15 +50,17 @@ Mario.runMarioRun = function(){
         setTimeout(function(){shotEntered=false;}, debounce);
         }
 
-        console.log("Game::  Entering Level --  Increase Level count", e, params);
+        // console.log("Game::  Entering Level ", e, params);
+        console.log("Game::  Entering Level ");
           $('#btnTop').hide();
           $('#btnBottom').hide();
 
       });
 
       $(document).on('exitLevel', function(e, params) {
-        Mario.StopMusic();
-        console.log("Game::  Exiting Level --  Increase Level count", e, params);
+        // Mario.StopMusic();
+        // console.log("Game::  Exiting Level --  Increase Level count", e, params);
+        console.log("Game::  Exiting Level");
         var coins = 0;
         var coinsStorage = window.localStorage.getItem('coins');
         if( coinsStorage ===0){

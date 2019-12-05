@@ -7,8 +7,8 @@ import Enjine from './../Enjine/core.js';
 
 Mario.Character = function() {
     //these are static in Notch's code... here it doesn't seem necessary
-    this.Large = true;
-    this.Fire = true;
+    this.Large = false;
+    this.Fire = false;
     this.Coins = 0;
     this.oneUpCount = 0;
     this.Lives = 3;
@@ -611,12 +611,13 @@ Mario.Character.prototype.Win = function() {
 };
 
 Mario.Character.prototype.Die = function() {
+    
     this.XDeathPos = this.X | 0;
     this.YDeathPos = this.Y | 0;
     this.World.Paused = true;
     this.DeathTime = 1;
     
-    Enjine.Resources.PauseAll();
+     Enjine.Resources.PauseAll();
     Enjine.Resources.PlaySound("death");
     
     this.SetLarge(false, false);
@@ -683,7 +684,7 @@ Mario.Character.prototype.Get1Up = function() {
 };
 
 Mario.Character.prototype.GetCoin = function() {
-    var oneUpMark = 10;
+    var oneUpMark = 100;
     if ( arguments[0]){
         this.Coins += parseInt(arguments[0]);
     }else{

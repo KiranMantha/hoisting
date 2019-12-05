@@ -70,7 +70,7 @@ class HomeContainer extends Component {
     return (
       <section className="home-container container">
         <section className="login-div">
-          <img src="/logo192.png" alot="Year end Mario" className="logo"/>
+          <img src="/images/logo192.png" alot="Year end Mario" className="logo"/>
           {template}
         </section>
        

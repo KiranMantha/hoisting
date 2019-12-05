@@ -69,6 +69,7 @@ Enjine.Resources = {
     },
     
     PlaySound: function(name, loop) {
+        try{
     	if (this.Sounds[name].index >= this.Sounds[name].length) {
     		this.Sounds[name].index = 0;	
     	}
@@ -76,7 +77,10 @@ Enjine.Resources = {
     		this.Sounds[name][this.Sounds[name].index].addEventListener("ended", this.LoopCallback, false);
     	}
     	this.Sounds[name][this.Sounds[name].index++].play();
-    	return this.Sounds[name].index;
+        return this.Sounds[name].index;
+    }catch(ex){
+        console.log("Something wrong in Playing MP3");
+    }
     },
     
     PauseChannel: function(name, index) {
@@ -87,16 +91,18 @@ Enjine.Resources = {
     },
     
     PauseSound: function(name) {
+       try{
     	for (var i = 0; i < this.Sounds[name].length; i++) {
     		if (!this.Sounds[name][i].paused) {
     			this.Sounds[name][i].pause();
     		}
     	}
-    	return this;
+        return this;
+    }catch(ex){}
     },
 
     PauseAll: function() {
-
+        try{
         if ( Object.keys(this.Sounds).length>0){
         for (var sound in this.Sounds) {
     	for (var i = 0; i < this.Sounds[sound].length; i++) {
@@ -105,9 +111,15 @@ Enjine.Resources = {
     			this.Sounds[sound][i].pause();
     		}
         }
-    };
+    }
+
 }
-    	return this;
+        return this;
+}
+        catch(ex){
+            console.log("Something wrong in Pausing MP3");
+        }
+
     },
     
     ResetChannel: function(name, index) {

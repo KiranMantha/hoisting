@@ -85,6 +85,7 @@ Mario.LevelState.prototype.Enter = function() {
 };
 
 Mario.LevelState.prototype.Exit = function() {
+    
     $(document).trigger('exitLevel', {coins: Mario.MarioCharacter.Coins, level: Mario.MarioCharacter.LevelString, lives:Mario.MarioCharacter.Lives });   
     delete this.Level;
     delete this.Layer;
@@ -113,6 +114,7 @@ Mario.LevelState.prototype.Update = function(delta) {
 
     this.TimeLeft -= delta;
     if ((this.TimeLeft | 0) === 0) {
+        
         Mario.MarioCharacter.Die();
     }
 
@@ -355,7 +357,7 @@ Mario.LevelState.prototype.RenderBlackout = function(context, x, y, radius) {
     if (radius > 320) {
         return;
     }
-
+      
     var xp = [], yp = [], i = 0;
     for (i = 0; i < 16; i++) {
         xp[i] = x + (Math.cos(i * Math.PI / 15) * radius) | 0;

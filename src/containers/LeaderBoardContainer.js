@@ -79,8 +79,8 @@ class LeaderBoardContainer extends Component {
                     }
                      {(index<=2)? this.printStar(stars[index]):''}
 
-                    Total Score ::
-                    {team.totalScore}
+                    Total Points ::
+                    {team.averageScore}
 
                   </div>
                   <div className="col-sm-12 col-md-6 col-12 fs-85">
@@ -89,8 +89,8 @@ class LeaderBoardContainer extends Component {
 
                   </div>
                   <div className="col-sm-12 col-md-6 col-12 fs-85">
-                    Avg ::
-                    {team.averageScore}
+                    Score ::
+                    {team.totalScore}
 
                   </div>
 
@@ -142,7 +142,7 @@ class LeaderBoardContainer extends Component {
                   <div className="col-sm-8 col-12">
                     Max World :: {person.highestWorldReached}-{person.highestLevelReached}
                     <br /> <br />
-                    Total Score ::  {person.totalScore}
+                    Score ::  {person.totalScore}
 
                   </div>
 
@@ -179,7 +179,7 @@ class LeaderBoardContainer extends Component {
             }
 
             <div className="col-sm col-12">
-              Total Score :: {team.totalScore} <br /> <br />
+              Score :: {team.totalScore} <br /> <br />
 
               Players :: {team.totalPlayers}
 
@@ -207,7 +207,7 @@ class LeaderBoardContainer extends Component {
               {myscore.totalCoinsCollected}
             </div>
             <div className="col-sm-8 col-12">
-              Total Score :: {myscore.totalScore} <br /> <br />
+              Score :: {myscore.totalScore} <br /> <br />
               Max World :: {myscore.highestWorldReached}-{myscore.highestLevelReached}
 
             </div>
@@ -229,7 +229,7 @@ class LeaderBoardContainer extends Component {
           <section className="container" >
             <section className="greeting">
               <div className="user-info">
-                <img src="/logo192.png" className="logo" alt="Lets play Mario"/>
+                <img src="/images/logo192.png" className="logo" alt="Lets play Mario"/>
                 {this.state.leaderBoard.individualScore.name}<br />
 
               </div>
@@ -254,7 +254,7 @@ class LeaderBoardContainer extends Component {
                   {this.renderTeamLeaderBoard()}
                 </Tab>
               </Tabs>
-              <footer> <div><i className="fa fa-code"></i> with <i className="fa fa-heart"></i> from Game Design, XT & Rogers Team </div></footer>
+              <footer> <div><i className="fa fa-code"></i> with <i className="fa fa-heart"></i> from Game Dev, XT & Rogers Team </div></footer>
             </section>
           </section>
           : (this.state.err ? (<div className="loading"> <div className="error">Sorry!! <br /> Seems something is on fire. Rescue is on its way. </div></div>) : (<div className="loading">Loading .. .. ..</div>))}
