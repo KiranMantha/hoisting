@@ -31,6 +31,14 @@ class App extends Component {
       let dt = new Date();
       
       let endTime = new Date(CONFIG.endTime);
+
+      // let playTill = new Date(CONFIG.PLAY_TILL);
+      // if (dt >=playTill){
+      //   if (!window.localStorage.getItem('pt')){
+      //   window.localStorage.setItem('pt', 'over');
+      //   window.location.href="/";
+      //   }
+      // }
   
       if (dt.getTime() > endTime.getTime()) {
         window.localStorage.removeItem('oracleID');

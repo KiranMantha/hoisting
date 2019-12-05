@@ -575,7 +575,7 @@ Mario.Character.prototype.Stomp = function(object) {
         }
     }
 
-    this.GetCoin(5);
+     //this.GetCoin();
 };
 
 Mario.Character.prototype.GetHurt = function() {
@@ -670,7 +670,7 @@ Mario.Character.prototype.Kick = function(shell) {
         this.InvulnerableTime = 1;
        
     }
-    this.GetCoin(5);
+    this.GetCoin(1);
  
 };
 

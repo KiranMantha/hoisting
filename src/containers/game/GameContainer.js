@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import DeviceOrientation, { Orientation } from 'react-screen-orientation';
 import { withRouter } from 'react-router-dom';
 import Mario from "./mario/code/setup.js";
+import Enjine from './mario/Enjine/core.js';
 import axios from 'axios';
 import { CONFIG } from './../../config';
 
 class GameContainer extends Component {
-
+   
     constructor(props) {
         super(props);
-        this.state = { oracleID: window.localStorage.getItem('oracleID'), disableButton:true, loading:true,music:true };
+        this.state = { oracleID: window.localStorage.getItem('oracleID'), disableButton:true, loading:true,music:true,playTill: CONFIG.PLAY_TILL  };
         this.history = this.props.history;
-       
-            document.querySelector('body').setAttribute('class', 'black-bg');
-        
+        document.querySelector('body').setAttribute('class', 'black-bg');
+
     }
     validateGameWorld(){
         axios.get(CONFIG.API_PREFIX + '/leaderBoard', { params: { oracleID: this.state.oracleID } })
@@ -32,46 +32,55 @@ class GameContainer extends Component {
 
     startGame(){
         setTimeout( ()=>{ 
-            Mario.runMarioRun(); 
-            this.setState({disableButton:false, loading:false})}, 2000);
+            
+            this.setState({disableButton:false, loading:false},()=>{Mario.runMarioRun(); })}, 2000);
     }
 
     componentDidMount() {
+        let dt  = new Date();
+        let till = new Date(this.state.playTill);
+        let playOver = dt.getTime() >= till.getTime() ; 
+        if ( playOver){
+            document.querySelector('body').removeAttribute('class');
+        }else{
 
         let alreadyLoggedIn = window.localStorage.getItem('oracleID');
         if (!alreadyLoggedIn) {
             this.history.push('/');
         }
-
-        window.addEventListener('orientationchange',  this.onOrientationChange);
+        var self = this;
+        window.addEventListener('orientationchange', (e)=>{ this.onOrientationChange(e, self); });
         if (window.screen.orientation.type.indexOf('landscape') === 0) {
           //  window.rMR = {};
            this.validateGameWorld();
         }else{
-            this.setState({disableButton:false});
+            this.setState({disableButton:false,music:false,loading:false});
         }
+    }
 
     }
-    onOrientationChange(e) {
+    onOrientationChange(e,self) {
         // console.log(e);
-        if (e) {
-            if (e.target.screen.orientation.type.indexOf('landscape') === 0) {
-               
-                setTimeout( ()=>{Mario.runMarioRun();  }, 2000);
-            } else {
-                Mario.StopMusic();
-                if(Mario.playBgMusic){
-                    Mario.PauseBG();
-                    }
-               
-            }
-        }
+
+        window.location.reload();
+        // if (e) {
+        //     if (e.target.screen.orientation.type.indexOf('landscape') === 0) {
+        //         setTimeout( ()=>{ self.setState({loading:false,music:true},()=>{Mario.runMarioRun();  Mario.PauseBG(false);});  }, 2000);
+        //     } else {
+        //        //  Mario.StopMusic();
+        //        self.setState({loading:false,music:false},()=>{ 
+        //         Mario.PauseBG(true);
+        //         Enjine.Resources.ClearSounds();
+        //         });
+                
+        //     }
+        // }
     }
     goBack(){
         window.rMR = null;
         Mario.StopMusic();
         if(Mario.playBgMusic){
-        Mario.PauseBG();
+        Mario.PauseBG(true);
         }
         this.setState({loading:true});
         //document.querySelector(".game-container").innerHTML ="";
@@ -82,7 +91,7 @@ class GameContainer extends Component {
 
     stopMusic(){
         this.setState({music:!this.state.music},()=>{
-            Mario.PauseBG();
+            Mario.PauseBG(!this.state.music);
         });
         
     }
@@ -90,13 +99,35 @@ class GameContainer extends Component {
     componentWillUnmount() {
         window.rMR = null;
         if(Mario.playBgMusic){
-            Mario.PauseBG();
+            Mario.PauseBG(true);
             }
         document.querySelector('body').removeAttribute('class');
     }
     render() {
-        window.screen.orientation.onchange = this.onOrientationChange();
+        // window.screen.orientation.onchange = this.onOrientationChange();
+
+        let dt  = new Date();
+        let till = new Date(this.state.playTill);
+        let playOver = dt.getTime() >= till.getTime() ; 
+        if ( playOver){
+            document.querySelector('body').removeAttribute('class');
+        }
+
+        if (playOver){
+            return (
+                <section className="home-container container">
+                <section className="login-div">
+                  <img src="/images/logo192.png" alot="Year end Mario" className="logo"/>
+                  <div className='cant-play'>Fun Time is Over <br/>
+                  <button className="btn btn-secondary btn-sm go-back " onClick={() => this.goBack()}><i className="fa fa-chevron-left"></i> Back</button>
+                  </div>
+                </section>
+               
+              </section>
+            )
+        }else{
         return (
+             
             <section className="mario-game ">
                    
                 <button className="btn btn-secondary btn-sm go-back " disabled={this.state.disableButton} onClick={() => this.goBack()}><i className="fa fa-chevron-left"></i> Back</button>
@@ -136,6 +167,7 @@ class GameContainer extends Component {
             
             </section>
         );
+        }
     }
 }
 

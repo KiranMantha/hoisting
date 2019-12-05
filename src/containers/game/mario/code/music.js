@@ -92,18 +92,22 @@ Mario.StopMusic = function() {
 	// MIDIjs.stop();
 };
 
-Mario.PauseBG = function() {
+Mario.PauseBG = function(pause) {
 	// console.log("stopping Music");
 	//Enjine.Resources.PauseAll();
 	// MIDIjs.stop();
-	Mario.playBgMusic = !Mario.playBgMusic;
+	// Enjine.Resources.RemoveSound(Mario.lastPlayed);
+	// Enjine.Resources.AddSound(Mario.lastPlayed);
+	Mario.playBgMusic = !pause;
 	if ( !Mario.playBgMusic){
+
 	Enjine.Resources.PauseSound('castle');
 	Enjine.Resources.PauseSound('title');
 	Enjine.Resources.PauseSound('mapmusic');
 	Enjine.Resources.PauseSound('underground');
 	Enjine.Resources.PauseSound('background');
 	}else{
+		
 		Enjine.Resources.PlaySound(Mario.lastPlayed);
 	}
 };
